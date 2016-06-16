@@ -1,0 +1,1 @@
+This file includes the model parameters used in the paper "Input-modulation as an alternative to conventional learning strategies" by Esin Yavuz and Thomas Nowotny. Full code will be made available upon acceptance.
