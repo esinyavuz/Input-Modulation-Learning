@@ -21,12 +21,12 @@ Neuron and synapse models are based on Nowotny et al. 2013, where more informati
 
 | Parameter   |  Value  |
 |-----|:------:|
-| g_Na (Na conductance) | 7.15 nS | 
+| g_Na (Na conductance) | 7.15 \mu S | 
 | E_Na (Na equipotential) | 50.0 mV |
-| g_K (K^+ conductance) | 1.43 nS |
+| g_K (K^+ conductance) | 1.43 \mu S |
 | E_K (K equipotential) | -95.0 mV |
-| g_l (leak conductance) | 26.72 pS |
-| E_l (leak equipotential) |  -63.563 |
+| g_l (leak conductance) | 26.72 nS |
+| E_l (leak equipotential) |  -63.563 mV |
 | C (membrane capacitance density) | 143 pF | 
 | I_0 (bias current) | 0.0 A | 
 
@@ -34,14 +34,14 @@ Neuron and synapse models are based on Nowotny et al. 2013, where more informati
 
 | Parameter   |  Value  |
 |-----|:------:|
-| g_Na (Na conductance) | 7.15 nS | 
+| g_Na (Na conductance) | 7.15 \mu S | 
 | E_Na (Na equipotential) | 50.0 mV |
-| g_K (K^+ conductance) | 1.43 nS |
+| g_K (K^+ conductance) | 1.43 \mu S |
 | E_K (K equipotential) | -95.0 mV |
-| g_l (leak conductance) | 26.72 pS |
-| E_l (leak equipotential) |  -63.563 |
+| g_l (leak conductance) | 26.72 nS |
+| E_l (leak equipotential) |  -63.563 mV |
 | C (membrane capacitance density) | 143 pF | 
-| g_M (M conductance) | 40 pS | 
+| g_M (M conductance) | 40 nS | 
 | kM_\alpha (rise rate for M activation) | 25 Hz |
 | kM_\beta (fall rate for M activation) | 1.0 Hz |
 | I_0 (bias current) | 0.0 A | 
@@ -50,17 +50,17 @@ Neuron and synapse models are based on Nowotny et al. 2013, where more informati
 
 | Parameter   |  Value  |
 |-----|:------:|
-| g_Na (Na conductance) | 7.15 nS | 
+| g_Na (Na conductance) | 7.15 \mu S | 
 | E_Na (Na equipotential) | 50.0 mV |
-| g_K (K^+ conductance) | 1.43 nS |
+| g_K (K^+ conductance) | 1.43 \mu S |
 | E_K (K equipotential) | -95.0 mV |
-| g_l (leak conductance) | 26.72 pS |
+| g_l (leak conductance) | 26.72 nS |
 | E_l (leak equipotential) |  -63.563 |
 | C (membrane capacitance density) | 143 pF | 
-| g_M (M conductance) | 60 pS | 
+| g_M (M conductance) | 60 nS | 
 | kM_\alpha (rise rate for M activation) | 80 Hz |
 | kM_\beta (fall rate for M activation) | 1.0 Hz |
-| I_0 (bias current) | -80.0 nA | 
+| I_0 (bias current) | -80.0 pA | 
 
 
 #Synapse Paremeters
@@ -68,7 +68,7 @@ Neuron and synapse models are based on Nowotny et al. 2013, where more informati
 ##ORN-PN synapses (non-plastic)
 |       Parameter   |  Value  | 
 | ------------- |:-------------:|
-| g (conductance)    |  21 nS |
+| g (conductance)    |  0.021 nS |
 | \sigma_g (jitter for initialising g) | 0.05 |
 | E_rev (reversal potential) | 0.0 mV |
 | \beta (postsynaptic decay rate) | 20 Hz |
@@ -76,13 +76,13 @@ Neuron and synapse models are based on Nowotny et al. 2013, where more informati
 ##ORN-PN synapses (plastic)
 |       Parameter   |  Value  | 
 | ------------- |:-------------:|
-| g_ini (initial value for conductance)    |  21 nS |
+| g_ini (initial value for conductance)    |  0.021 nS |
 | E_rev (reversal potential) | 0.0 mV |
 | \beta (postsynaptic decay rate) | 20 Hz |
-| g_max (maximal conductance) | 45 nS |
+| g_max (maximal conductance) | 0.045 nS |
 | \tau_{decay} (decay time for recovery) | 300 s |
-| \g_mid (medium value for conductance)  |  21 nS |
-| \g_slope (slope of the STDP curve)  |  21 nS |
+| \g_mid (medium value for conductance)  |  0.021 pS |
+| \g_slope (slope of the STDP curve)  |  0.021 nS |
 | p_0 (baseline for eligibility curve) | -5e-12 |
 | \tau_p (time constant of eligibility decay) | 1.5 s |
 | A (cste to be added to p for STDP)| 6e-14 | 
@@ -91,7 +91,7 @@ Neuron and synapse models are based on Nowotny et al. 2013, where more informati
 ##ORN-LN synapses (non-plastic)
 |       Parameter   |  Value  | 
 | ------------- |:-------------:|
-| g (conductance)    |  12 nS |
+| g (conductance)    |  0.012 nS |
 | \sigma_g (jitter for initialising g) | 0.1 |
 | E_rev (reversal potential) | 0.0 mV |
 | \beta (postsynaptic decay rate) | 20 Hz |
@@ -99,7 +99,7 @@ Neuron and synapse models are based on Nowotny et al. 2013, where more informati
 ##PN-LN synapses (non-plastic)
 |       Parameter   |  Value  | 
 | ------------- |:-------------:|
-| g (conductance)    |  300 nS |
+| g (conductance)    |  0.3 nS |
 | \sigma_g (jitter for initialising g) | 0.1 |
 | E_rev (reversal potential) | 0.0 mV |
 | \beta (postsynaptic decay rate) | 20 Hz |
@@ -107,21 +107,21 @@ Neuron and synapse models are based on Nowotny et al. 2013, where more informati
 ##LN-PN synapses (non-plastic)
 |       Parameter   |  Value  | 
 | ------------- |:-------------:|
-| g (conductance)    |  1 mS |
+| g (conductance)    |  1 nS |
 | E_rev (reversal potential) | -80.0 mV |
 | \beta (postsynaptic decay rate) | 10 Hz |
 
 ##LN-LN synapses (non-plastic)
 |       Parameter   |  Value  | 
 | ------------- |:-------------:|
-| g (conductance)    |  1.2 mS |
+| g (conductance)    |  1.2 nS |
 | E_rev (reversal potential) | -80.0 mV |
 | \beta (postsynaptic decay rate) | 10 Hz |
   
 ##PN-LHI synapses (non-plastic)
 |       Parameter   |  Value  | 
 | ------------- |:-------------:|
-| g (conductance)    |  170 nS |
+| g (conductance)    |  0.017 nS |
 | \sigma_g (jitter for initialising g) | 0.05 |
 | E_rev (reversal potential) | 0.0 mV |
 | \beta (postsynaptic decay rate) | 10 Hz |
@@ -129,7 +129,7 @@ Neuron and synapse models are based on Nowotny et al. 2013, where more informati
 #Reward parameters
 |       Parameter   |  Value  | 
 | ------------- |:-------------:|
-| R_{0} (baseline reward -- or -1 x expectance ) | -8 |
-| R_max (value of given reward) | 50.0 |
+| R_{0} (baseline reward -- or -1 x expectance ) | -8.0 |
+| R_max (value of given reward) | 40.0 |
 | \tau_{R} (Time constant of reward rise/decay) | 50 ms |
 
