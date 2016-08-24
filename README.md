@@ -7,7 +7,7 @@ Neuron and non-plastic synapse models are based on [Nowotny et al. 2013][@Nowotn
 
 Prerequisites:
 - CUDA Toolkit
-- GeNN v2.1.1 (available here: )
+- GeNN v2.1.1 (available here: https://github.com/genn-team/genn/tree/2.1.1)
 
 
 #Neuron Parameters
@@ -146,5 +146,5 @@ Prerequisites:
 Data-driven honeybee antennal lobe model suggests how stimulus-onset asynchrony 
 can aid odour segregation. Brain research, 1536, pp.119-134."
 
-[@Yavuzetal2016]: "Yavuz, E. and Nowotny, T., 2016.
+[@Yavuzetal2016]: http://sro.sussex.ac.uk/61572/ "Yavuz, E. and Nowotny, T., 2016.
 Input-modulation as an alternative to conventional learning strategies. LNCS,in press."                                   
