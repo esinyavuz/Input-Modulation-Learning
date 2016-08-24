@@ -2,11 +2,13 @@ This repository includes the model used in "Input-modulation as an alternative t
 
 It consists of a model of plasticity in the honeybee olfactory system, modulated by appetitive conditioning. 
 
-Neuron and non-plastic synapse models are based on [Nowotny et al. 2013][@Nowotnyetal2013], where more information can be found. Mechanisms for input-modulation by reinforcement learning are explained in [Yavuz et al. 2016][@Yavuzetal2016].
+Neuron and non-plastic synapse models are based on [Nowotny et al. 2013][@Nowotnyetal2013], 
+where more information can be found. Mechanisms for input-modulation by reinforcement learning 
+are explained in [Yavuz and Nowotny 2016][@Yavuzetal2016].
 
 
 Prerequisites:
-- CUDA Toolkit
+- CUDA Toolkit (tested on v 6.5 and 7)
 - GeNN v2.1.1 (available here: https://github.com/genn-team/genn/tree/2.1.1)
 
 
@@ -148,5 +150,6 @@ REFERENCES
 Data-driven honeybee antennal lobe model suggests how stimulus-onset asynchrony 
 can aid odour segregation. Brain research, 1536, pp.119-134."
 
-[@Yavuzetal2016]: http://sro.sussex.ac.uk/61572 "Yavuz, E. and Nowotny, T., 2016.
+[@Yavuzetal2016]: http://sro.sussex.ac.uk/61572 
+"Yavuz, E. and Nowotny, T., 2016.
 Input-modulation as an alternative to conventional learning strategies. LNCS, in press."                                   
