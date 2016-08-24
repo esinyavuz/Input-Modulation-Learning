@@ -1,6 +1,14 @@
-This file includes the model parameters used in the paper "Input-modulation as an alternative to conventional learning strategies" by Esin Yavuz and Thomas Nowotny. Full code will be made available upon acceptance.
+This repository includes the model used in "Input-modulation as an alternative to conventional learning strategies" by Esin Yavuz and Thomas Nowotny, accepted for the ICANN 2016 conference.
 
-Neuron and synapse models are based on Nowotny et al. 2013, where more information can be found
+It consists of a model of plasticity in the honeybee olfactory system, modulated by appetitive conditioning. 
+
+Neuron and non-plastic synapse models are based on [Nowotny et al. 2013][@Nowotnyetal2013], where more information can be found. Mechanisms for input-modulation by reinforcement learning are explained in [Yavuz et al. 2013][@Yavuzetal2016].
+
+
+Prerequisites:
+- CUDA Toolkit
+- GeNN v2.1.1 (available here: )
+
 
 #Neuron Parameters
 
@@ -133,3 +141,10 @@ Neuron and synapse models are based on Nowotny et al. 2013, where more informati
 | R_max (value of given reward) | 40.0 |
 | \tau_{R} (Time constant of reward rise/decay) | 50 ms |
 
+[@Nowotnyetal2013]: http://dx.doi.org/10.1016/j.brainres.2013.05.038
+"Nowotny, T., Stierle, J.S., Galizia, C.G. and Szyszka, P., 2013.
+Data-driven honeybee antennal lobe model suggests how stimulus-onset asynchrony 
+can aid odour segregation. Brain research, 1536, pp.119-134."
+
+[@Yavuzetal2016]: "Yavuz, E. and Nowotny, T., 2016.
+Input-modulation as an alternative to conventional learning strategies. LNCS,in press."                                   
