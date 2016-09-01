@@ -1,7 +1,7 @@
 This repository includes the model used in "Input-modulation as an alternative to conventional learning strategies" by Esin Yavuz and Thomas Nowotny, accepted for the ICANN 2016 conference.
 
 It consists of a model of plasticity in the honeybee olfactory system, modulated by appetitive conditioning. 
-The model is simulated using the GeNN framework [Yavuz et al. 2016][@Yavuzetal2016b].
+The model is simulated using the GeNN framework [(Yavuz et al. 2016)][@Yavuzetal2016b].
 
 Neuron and non-plastic synapse models are based on [Nowotny et al. 2013][@Nowotnyetal2013], 
 where more information can be found. Mechanisms for input-modulation by reinforcement learning 
@@ -149,7 +149,7 @@ REFERENCES
 [@Yavuzetal2016b]: http://dx.doi.org/10.1038%2Fsrep18854
 "Yavuz, E., Turner, J. and Nowotny, T., 2016. 
 GeNN: a code generation framework for accelerated brain simulations.
-Scientific reports, 6. (2016)"
+Scientific reports, 6."
 
 [@Nowotnyetal2013]: http://dx.doi.org/10.1016/j.brainres.2013.05.038
 "Nowotny, T., Stierle, J.S., Galizia, C.G. and Szyszka, P., 2013.
