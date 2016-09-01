@@ -1,0 +1,4 @@
+write_all 1
+seed 116572741
+odorPath odors_slow
+myORNPN_ini[0] 2.10000e-05
