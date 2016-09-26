@@ -26,7 +26,7 @@ short write_all= 0; // whether to write all variables (should be used alternativ
 short readState= 0;  // whether to read a previous dump of the internal state
 short writeState= 0; // whether to dump the internal state
 
-string odorPath= "odors_slow";
+string odorPath= "odors";
 string odorExtension= ".para";
 string LNPNsynFile="model/inhibition.dat";
 

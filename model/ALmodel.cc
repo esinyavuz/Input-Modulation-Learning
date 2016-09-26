@@ -23,7 +23,7 @@
 */
 //--------------------------------------------------------------------------
 
-#define DT 0.01  //!< global time step at which the simulation will run
+#define DT 0.02  //!< global time step at which the simulation will run
 #include "modelSpec.h"
 #include "modelSpec.cc"
 #include "settings.h"
@@ -42,7 +42,7 @@ int _NhLN;
 int _nORN= 15;
 int _NORN;
 int _nOdor= 17;
-int _NLHI= 4; //1-2: input from AL (1:L, 2:NL), 3-4: input from KC (3:L ,4:NL)
+int _NLHI= 2; 
 
 #define ORN_PNO 8
 double myORN_p[ORN_PNO]= {
@@ -50,8 +50,8 @@ double myORN_p[ORN_PNO]= {
   0.2,              // 1 - trefract: refractory period + spike with
   -60.0,            // 2 - Vrest: resting potential
   50.0,             // 3 - Vspike: potential at top of spike
-  0.005,            // 4 - brate: base firing rate [kHz]
-  1.4e14,           // 5 - randfac: amplitude of frequency change normalised to random number generator range
+  0.06,            // 4 - brate: base firing rate [kHz]  (0.0002*40/lmax, would be better as a derived param)
+  2.0,          // 5 - lmax (0.0625 x 40)
   0.004,             // 6 - adrate: rate of adaptation 
   0.002             // 7 - recrate: rate of recovery from adaptation 
 };
@@ -62,7 +62,7 @@ const char *ORN_p_text[ORN_PNO]= {
   "2 - Vrest: resting potential",
   "3 - Vspike: potential at top of spike",
   "4 - brate: base firing rate [kHz]",
-  "5 - randfac: amplitude of frequency change normalised to random number generator range",
+  "5 - lmax: amplitude of frequency change",
   "6 - adrate: rate of adaptation",
   "7 - recrate: rate of recovery from adaptation"
 };
@@ -108,7 +108,7 @@ double myPN_p[ALN_PNO]= {
   0.0,           // 7 - gM: M conductance
   0.0025,        // 8 - kMalpha: rise rate for M activation
   0.0001,        // 9 - kMbeta: fall rate for M activation
-  0.05           // 10 - I0: bias current
+  0.0           // 10 - I0: bias current
 };
 
 const char *ALN_p_text[ALN_PNO]= {
@@ -127,11 +127,11 @@ const char *ALN_p_text[ALN_PNO]= {
 
 #define ALN_IVARNO 5
 double myPN_ini[ALN_IVARNO]= {
-  -60.5,          // 0 - membrane potential E
+  -70.0,          // 0 - membrane potential E
   0.01899074535,         // 1 - Na channel activation m
   0.9899576152,          // 2 - not Na channel blocking h
   0.04034804332,         // 3 - K channel activation n
-  0.1471045567           // 4 - IM activation r
+  0.09           // 4 - IM activation r
 };
 
 const char *ALN_ini_text[ALN_IVARNO]= {
@@ -150,18 +150,18 @@ double myhLN_p[ALN_PNO]= {
   0.02672,       // 4 - gl: leak conductance in
   -63.563,       // 5 - El: leak equi potential in mV
   0.143,         // 6 - C: membr. capacity density 
-  0.006,          // 7 - gM: M conductance
-  0.025,          // 8 - kMalpha: rise rate for M activation
+  0.04,          // 7 - gM: M conductance
+  0.0025,          // 8 - kMalpha: rise rate for M activation
   0.0001,        // 9 - kMbeta: fall rate for M activation
-  -0.03            // 10 - I0: bias current
+  0            // 10 - I0: bias current
 };
 
 double myhLN_ini[ALN_IVARNO]= {
-  -61.43808551,     // 0 - membrane potential E
-  0.02987296875,    // 1 - Na channel activation m
-  0.9826520875,     // 2 - not Na channel blocking h
-  0.06344290756,    // 3 - K channel activation n
-  0.2973757385      // 4 - M channel activation r
+  -58.27538967, //-59.9, //-61.43808551,     // 0 - membrane potential E
+  0.05355766548, //0.04, //0.02987296875,    // 1 - Na channel activation m
+  0.9787275908, //0.986, //0.9826520875,     // 2 - not Na channel blocking h
+  0.1024556065, //0.07, //0.06344290756,    // 3 - K channel activation n
+ 0.04,// 0.05 //0.14//0.2973757385      // 4 - M channel activation r
 };
 
 double myLHI_p[ALN_PNO]= {
@@ -172,9 +172,9 @@ double myLHI_p[ALN_PNO]= {
   0.02672,       // 4 - gl: leak conductance in
   -63.563,       // 5 - El: leak equi potential in mV
   0.143,         // 6 - C: membr. capacity density 
-  0.05,          // 7 - gM: M conductance
-  0.02,          // 8 - kMalpha: rise rate for M activation
-  0.002,         // 9 - kMbeta: fall rate for M activation
+  0.06,          // 7 - gM: M conductance
+  0.008,          // 8 - kMalpha: rise rate for M activation
+  0.0001,         // 9 - kMbeta: fall rate for M activation
   -0.08            // 10 - I0: bias current
 };
 
@@ -193,16 +193,16 @@ double myLHI_ini[ALN_IVARNO]= {
 //---------------------------------------------------------------------------
 // ORNPN synapses (not learning atm)
 double myORNPN_ini[SYN1_IVARNO]= {
-    3.7e-06//0.0035 // 0 - g: conductance
+    2.1e-05 // 0 - g: conductance
 };
-double myORNPN_gjitter= 0.1; // in percent of g
+double myORNPN_gjitter= 0.05; // in percent of g
 double *myORNPN_p= NULL;
 
 #define POSTSYN1_PNO 2
 double *myORNPN_post_ini= NULL;
 double myORNPN_post_p[POSTSYN1_PNO]= {
     0.0, // 0 - Erev: reversal potential
-    0.04 // 1 - beta: decay rate (kHz)
+    0.02 // 1 - beta: decay rate (kHz)
 };
 
 //---------------------------------------------------------------------------
@@ -210,37 +210,37 @@ double myORNPN_post_p[POSTSYN1_PNO]= {
 
 #define ASYN_PNO 9
 double myORNPN1_p[ASYN_PNO] = {
-    7.5e-06,         // 0 - gmax: maximal conductance
+    4.5e-05,         // 0 - gmax: maximal conductance
     300000,          // 1 - decay timescale conductance
-    4.00000e-06,        // 2 - gmid
-    3.000000e-06,         // 3 - gslope
-    -2.2e-12,         // 4 - pbase: baseline of elgibility p
+    2.100000e-05,        // 2 - gmid
+    2.00000e-05,         // 3 - gslope
+    -5e-12,         // 4 - pbase: baseline of elgibility p
     1500.0,           // 5 - p_lambda decay time eligibilty trace
-    0.8e-14,           // 6 - A = Amplitude of STDP branches
+    6e-14,           // 6 - A = Amplitude of STDP branches
     12,              // 7 - stdp: tau_p
     6              // 8 - stdp: tau_m
 };
-double myORNPN1_gjitter= 0.1; // in percent of g
+double myORNPN1_gjitter= 0.05; // in percent of g
 double gORNPN1_MIN= 1e-20;
 
 #define ASYN_IVARNO 4
 double myORNPN1_ini[ASYN_IVARNO]= {
-    -2.2e-12,            // 0 - eligibility trace p
+    -5e-12,            // 0 - eligibility trace p
     0.01,           // 1 - graw (not used)
-    3.7e-06,        // 2 - g
+    2.1e-05,        // 2 - g
     0.0             // 3 - lastupdate
 };
 
 double *myORNPN1_post_ini= NULL;
 double myORNPN1_post_p[2]={
     0.0, // 0 - Erev: reversal potential
-    0.01 // 1 - beta: decay rate (kHz)
+    0.02 // 1 - beta: decay rate (kHz)
 };
 
 //---------------------------------------------------------------------------
 // ORNhLN synapses
 double myORNhLN_ini[SYN1_IVARNO]= {
-  6.5e-6 // 0 - g: conductance
+ 1.2e-5 // 0 - g: conductance
 };
 double *myORNhLN_p= NULL;
 double myORNhLN_gjitter= 0.1; // in percent of g
@@ -248,13 +248,13 @@ double myORNhLN_gjitter= 0.1; // in percent of g
 double *myORNhLN_post_ini= NULL;
 double myORNhLN_post_p[POSTSYN1_PNO]= {
   0.0, // 0 - Erev: reversal potential
-  0.01 // 1 - beta: decay rate (kHz)
+  0.02 // 1 - beta: decay rate (kHz)
 };
 
 //---------------------------------------------------------------------------
 // PNhLN synapses
 double myPNhLN_ini[SYN1_IVARNO]= {
-  1.5e-05 // 0 - g: conductance
+  3e-4 // 0 - g: conductance
 };
 double *myPNhLN_p= NULL;
 double myPNhLN_gjitter= 0.1; // in percent of g
@@ -268,41 +268,41 @@ double myPNhLN_post_p[POSTSYN1_PNO]= {
 //---------------------------------------------------------------------------
 // hLNPN synapses
 double myhLNPN_ini[SYN1_IVARNO]= {
-  0.0007  // 0 - g: conductance
+  1e-03 // 0 - g: conductance
 };
 double *myhLNPN_p= NULL;
 
 double *myhLNPN_post_ini= NULL;
 double myhLNPN_post_p[POSTSYN1_PNO]= {
   -80.0,  // 0 - Erev: reversal potential
-  0.05    // 1 - beta: decay rate (kHz)
+  0.01   // 1 - beta: decay rate (kHz)
 };
 
 //---------------------------------------------------------------------------
 // hLNhLN synapses
 double myhLNhLN_ini[SYN1_IVARNO]= {
-  0.0003  // 0 - g: conductance
+  1.2e-03// 0 - g: conductance
 };
 double *myhLNhLN_p= NULL;
 
 double *myhLNhLN_post_ini= NULL;
 double myhLNhLN_post_p[POSTSYN1_PNO]= {
   -80.0,  // 0 - Erev: reversal potential
-  0.02    // 1 - beta: decay rate (kHz)
+  0.01    // 1 - beta: decay rate (kHz)
 };
 
 //---------------------------------------------------------------------------
 // PNLHI synapses
 double myPNLHI_ini[SYN1_IVARNO]= {
-  0.85e-05  // 0 - g: conductance
+  1.7e-05  // 0 - g: conductance
 };
-double myPNLHI_gjitter= 0.1;  // as a fraction of g0
+double myPNLHI_gjitter= 0.05;  // as a fraction of g0
 double *myPNLHI_p= NULL;
 
 double *myPNLHI_post_ini= NULL;
 double myPNLHI_post_p[POSTSYN1_PNO]= {
   0.0,  // 0 - Erev: reversal potential
-  0.004    // 1 - beta: decay rate (kHz)
+  0.01    // 1 - beta: decay rate (kHz)
 };
 
 //---------------------------------------------------------------------------
@@ -323,7 +323,7 @@ public:
   }
 };
 
-double base_RORNPN1= -5;  // baseline for reward (negative == extinction)
+double base_RORNPN1= -8;  // baseline for reward (negative == extinction)
 double RORNPN1_tau= 50.0;    // time scale of reward change
 
 #include "ALap.h"
@@ -463,29 +463,27 @@ asynapse.pNames.push_back(tS("p_lambda")); // 5: decay timescale eligibility tra
   n.pNames.push_back(tS("Vrest"));
   n.pNames.push_back(tS("Vspike"));
   n.pNames.push_back(tS("brate"));
-  n.pNames.push_back(tS("randfac"));
+  n.pNames.push_back(tS("lmax"));
   n.pNames.push_back(tS("adrate"));
   n.pNames.push_back(tS("recrate"));
   n.simCode= tS("// do explicit updates for up to two odors \n\
-scalar mdt= DT/5.0;\n\
-for (int mt=0; mt < 5; mt++) {\n\
 // variables of odor 0 \n\
 scalar dr= -$(kk)[0]*$(r0)+$(kk)[2]*$(rs0)-$(kk)[3]*$(r0)+$(kk)[1]*$(rb)*pow($(kk)[5],$(kk)[4]); \n\
 scalar drs= -$(kk)[2]*$(rs0)+$(kk)[3]*$(r0); \n\
 scalar tmp= -$(kk)[1]*$(rb)*pow($(kk)[5],$(kk)[4])+$(kk)[0]*$(r0); \n\
-$(r0)+= dr*mdt; \n\
-$(rs0)+= drs*mdt; \n\
+$(r0)+= dr*DT; \n\
+$(rs0)+= drs*DT; \n\
 // variables of odor 1 \n\
-dr= -$(kk)[5]*$(r1)+$(kk)[7]*$(rs1)-$(kk)[8]*$(r1)+$(kk)[6]*$(rb)*pow($(kk)[11],$(kk)[9]); \n\
-drs= -$(kk)[7]*$(rs1)+$(kk)[8]*$(r1); \n\
-tmp+= -$(kk)[6]*$(rb)*pow($(kk)[11],$(kk)[9])+$(kk)[5]*$(r1); \n\
-$(r1)+= dr*mdt; \n\
-$(rs1)+= drs*mdt; \n\
+//dr= -$(kk)[6]*$(r1)+$(kk)[8]*$(rs1)-$(kk)[9]*$(r1)+$(kk)[7]*$(rb)*pow($(kk)[11],$(kk)[10]); \n\
+//drs= -$(kk)[8]*$(rs1)+$(kk)[9]*$(r1); \n\
+//tmp+= -$(kk)[7]*$(rb)*pow($(kk)[11],$(kk)[10])+$(kk)[6]*$(r1); \n\
+//$(r1)+= dr*DT; \n\
+//$(rs1)+= drs*DT; \n\
 // common unbound variable and adaptation variable \n\
-$(ad)+= ($(recrate)-($(trate)*$(adrate)+$(recrate))*$(ad))*mdt; \n\
-$(rb)+= tmp*mdt; \n\
+$(ad)+= ($(recrate)-($(trate)*$(adrate)+$(recrate))*$(ad))*DT; \n\
+$(rb)+= tmp*DT; \n\
+$(trate)= $(brate)+$(rs0);//+$(rs1); \n\
 // Spike generation \n\
-$(trate)= $(brate)+$(rs0)+$(rs1); \n\
 if ($(V) >= $(Vspike)) { \n\
   if (t - $(sT) > $(tspike)) {\n\
     $(V)= $(Vrest); \n\
@@ -499,11 +497,10 @@ else { \n\
   else { \n\
     uint64_t rnd; \n\
     MYRAND($(seed),rnd); \n\
-    if (rnd <= $(randfac)*$(trate)*$(ad)) { \n\
+    if (rnd < (uint64_t)($(lmax)*pow(2.0, (double) sizeof(uint64_t)*8-16)*$(trate)*$(ad)*DT)) { \n\
       $(V)= $(Vspike); \n\
     } \n\
   } \n\
-} \n\
 } \n\
 ");
   n.thresholdConditionCode= tS("($(V) > 0.0)");
@@ -536,25 +533,23 @@ else { \n\
   n2.pNames.push_back(tS("kMbeta"));
   n2.pNames.push_back(tS("I0"));
   n2.simCode= tS("scalar Imem; \n\
-scalar mdt= DT/5.0;\n\
-for (int mt=0; mt < 5; mt++) {\n\
 Imem= -($(m)*$(m)*$(m)*$(h)*$(gNa)*($(V)-$(ENa)) + \n\
 $(n)*$(n)*$(n)*$(n)*$(gK)*($(V)-$(EK)) + $(r)*$(gM)*($(V)-$(EK))+ \n\
 $(gl)*($(V)-$(El)) - $(I0) - Isyn); \n\
 scalar _a= 0.32*(-52.0-$(V)) / (exp((-52.0-$(V))/4.0)-1.0); \n\
 scalar _b= 0.28*(25.0+$(V)) / (exp((25.0+$(V))/5.0)-1.0); \n\
-$(m)+=(_a*(1.0-$(m)) - _b*$(m))*mdt; \n\
+$(m)+=(_a*(1.0-$(m)) - _b*$(m))*DT; \n\
 _a= 0.128*exp((-48.0-$(V))/18.0); \n\
 _b= 4.0 / (exp((-25.0-$(V))/5.0)+1.0); \n\
-$(h)+= (_a*(1.0-$(h)) - _b*$(h))*mdt; \n\
+$(h)+= (_a*(1.0-$(h)) - _b*$(h))*DT; \n\
 _a= .032*(-50.0-$(V)) / (exp((-50.0-$(V))/5.0)-1.0); \n\
 _b= 0.5*exp((-55.0-$(V))/40.0); \n\
-$(n)+= (_a*(1.0-$(n)) - _b*$(n))*mdt; \n\
+$(n)+= (_a*(1.0-$(n)) - _b*$(n))*DT; \n\
 _a= $(kMalpha)/(1.0+exp((20.0-$(V))/5)); \n\
 _b= $(kMbeta); \n\
-$(r)+= (_a*(1.0-$(r)) - _b*$(r))*mdt; \n\
-$(V)+= Imem/$(C)*mdt; \n\
-} \n\
+$(r)+= (_a*(1.0-$(r)) - _b*$(r))*DT; \n\
+$(V)+= Imem/$(C)*DT; \n\
+//} \n\
 ");
   n2.thresholdConditionCode= tS("($(V) > 0.0)"); // Wustenberg 2004 : 25 V
   unsigned int HONEYALNEURON= nModels.size();

@@ -29,6 +29,7 @@ randomGauss RG;
 #include "AL.cc"
 
 CStopWatch timer;
+unsigned int sumORN, sumPN, sumhLN, sumLHI =0;
 
 int main(int argc, char *argv[])
 {
@@ -130,6 +131,10 @@ int main(int argc, char *argv[])
   copySpikeNFromDevice();
 	copySpikesFromDevice();
     }
+	sumORN+=spikeCount_ORN;
+	sumPN+=spikeCount_PN;
+	sumhLN+=spikeCount_hLN;
+	sumLHI+=spikeCount_LHI;
 
 
     al.output_state_st(stos);
@@ -148,7 +153,8 @@ int main(int argc, char *argv[])
   stos.close();
   tme= timer.getElapsedTime();
   cudaDeviceReset();
-  cerr << "elapsed time: " << tme << endl;
+  cerr << "elapsed time: " << tme << ", " << sumORN << " ORN "<< sumPN << " PN " << sumhLN << " LN " << sumLHI << " LHI spikes." << endl;
+
   return 0;
 }
   

@@ -117,7 +117,7 @@ void AL::connect_ORN_PN1()
 	cerr << theGRaw << " " << " ";
 	cerr << myORNPN1_p[0]*(tanh((theGRaw-myORNPN1_p[2])/myORNPN1_p[3] )+1)/2 << endl;
 //#endif
-	pORNPN1[n]= -2.2e-12; //pbase
+	pORNPN1[n]= -5e-12; //pbase
 	grawORNPN1[n]= theGRaw;
 	lastupdateORNPN1[n++]= 0.0;
 #ifdef DEBUG
@@ -206,7 +206,7 @@ void AL::connect_PN_hLN()
   CPNhLN.indInG[_NPN]= connN;
 }
  
- // excite hLNs from PNs
+ // excite hLHIs from PNs
 void AL::connect_PN_LHI()
 {
 #ifdef DEBUG
@@ -387,7 +387,7 @@ void AL::read_protocol(ifstream &is)
 #endif
 }
 
-void AL::add_input(unsigned int od, double c, unsigned int pos) 
+void AL::add_input(unsigned int od, double c, unsigned int pos) //c in log10 
 {
 #ifdef DEBUG
     cerr << "# entering add_input ..." << endl;
@@ -448,8 +448,8 @@ void AL::protocol_handler(double t)
 	p= proto[iProto];
 	if (p.action == "odor") {
 	    if (p.value[3].i == 1) {
-		add_input(p.value[1].i, pow(10.0, p.value[2].d), p.value[0].i); 
-		cerr << "# t: " << t << " - added input " << p.value[1].i << endl;
+		add_input(p.value[1].i, p.value[2].d, p.value[0].i); 
+		cerr << "# t: " << t << " - added input " << p.value[1].i  << " conc=" << p.value[2].d << endl;
 	    }
 	    else {
 		remove_input(p.value[0].i);
@@ -576,17 +576,17 @@ void AL::output_full_state(ostream &os)
     os << RORNPN1 << " ";
     os << pORNPN1[_nORN] << " ";
     os << pORNPN1[_nORN*5] << " ";
-    os << pORNPN1[_nORN*14] << " ";
+    os << pORNPN1[_nORN*12] << " ";
     os << gORNPN1[_nORN] << " ";
     os << gORNPN1[_nORN*5] << " ";
-    os << gORNPN1[_nORN*14] << " ";
+    os << gORNPN1[_nORN*12] << " ";
     os << grawORNPN1[_nORN] << " ";
     os << grawORNPN1[_nORN*5] << " ";
-    os << grawORNPN1[_nORN*14] << " ";
+    os << grawORNPN1[_nORN*12] << " ";
     os << VPN[0] << " ";
     os << VPN[1] << " ";
     os << VPN[5] << " ";
-    os << VPN[14] << " ";
+    os << VPN[12] << " ";
    	os << pORNPN1[_nORN*2] << " ";
     os << pORNPN1[_nORN*9] << " ";
     os << pORNPN1[_nORN*25] << " ";
@@ -643,7 +643,7 @@ void AL::output_ORN(ostream &os)
 }
 
 void AL::randomize_V(){
-	float jitter =10; 
+	float jitter =20; 
 	for (int k=0;k<_NPN;k++){
   	VPN[k]= myPN_ini[0]-jitter/2+R.n()*jitter;
 	}
@@ -651,10 +651,7 @@ void AL::randomize_V(){
 void AL::output_state_st(ostream &osr)
 {
     int offset= 0;
-		for (int i= 0; i < spikeCount_ORN; i++) {
-	osr << t << " " << spike_ORN[i]+offset << endl;
-    }
-    offset+= _NORN;
+
     for (int i= 0; i < spikeCount_PN; i++) {
 	osr << t << " " << spike_PN[i]+offset << endl;
     }
