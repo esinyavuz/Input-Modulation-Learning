@@ -9,7 +9,7 @@ are explained in [Yavuz and Nowotny 2016][@Yavuzetal2016].
 
 
 Prerequisites:
-- CUDA Toolkit (tested on v 6.5 and 7)
+- CUDA Toolkit (tested on v 6.5 and 7. The version of GeNN used in this paper won't work with v 8.0 because of the redefinition of the atomicAdd function for the double precision).
 - GeNN v2.1.1 (available here: https://github.com/genn-team/genn/tree/2.1.1)
 
 
