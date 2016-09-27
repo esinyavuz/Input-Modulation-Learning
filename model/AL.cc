@@ -596,9 +596,8 @@ void AL::output_full_state(ostream &os)
     os << grawORNPN1[_nORN*2] << " ";
     os << grawORNPN1[_nORN*9] << " ";
     os << grawORNPN1[_nORN*25] << " ";
-    os << VPN[2] << " ";
-    os << VPN[9] << " ";
-    os << VPN[24] << " ";
+    os << VLHI[0] << " ";
+    os << VLHI[1] << " ";
     os << endl;
 }
 

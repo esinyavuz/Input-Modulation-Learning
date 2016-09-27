@@ -10,7 +10,8 @@
    initial version: 2002-01-25
   
 --------------------------------------------------------------------------*/
-
+//example usage:
+//st2asdf_mult ALmodel.out.st 50 20 ALmodel.sdf <sim. time> <# neurons>
 
 #include <iostream>
 #include <fstream>

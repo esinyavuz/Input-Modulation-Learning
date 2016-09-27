@@ -112,7 +112,6 @@ int main(int argc, char *argv[])
     sname >> thename;
     ifstream sis(thename, ios::binary);
     assert(sis.good());
-    al.read_state(sis);
   }
 
   al.output_state_st(stos);
@@ -147,7 +146,6 @@ int main(int argc, char *argv[])
       sname >> thename;
       ofstream sis(thename, ios::binary);
       assert(sis.good());
-      al.write_state(sis);
   }
   timer.stopTimer();
   stos.close();

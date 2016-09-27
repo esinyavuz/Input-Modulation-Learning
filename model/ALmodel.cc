@@ -23,7 +23,7 @@
 */
 //--------------------------------------------------------------------------
 
-#define DT 0.02  //!< global time step at which the simulation will run
+#define DT 0.02 //!< global time step at which the simulation will run
 #include "modelSpec.h"
 #include "modelSpec.cc"
 #include "settings.h"
@@ -50,8 +50,8 @@ double myORN_p[ORN_PNO]= {
   0.2,              // 1 - trefract: refractory period + spike with
   -60.0,            // 2 - Vrest: resting potential
   50.0,             // 3 - Vspike: potential at top of spike
-  0.06,            // 4 - brate: base firing rate [kHz]  (0.0002*40/lmax, would be better as a derived param)
-  2.0,          // 5 - lmax (0.0625 x 40)
+  0.06,            // 4 - brate: base firing rate [kHz]  (in KHz*40/lmax, would be better as a derived param)
+  2.0,          // 5 - lmax
   0.004,             // 6 - adrate: rate of adaptation 
   0.002             // 7 - recrate: rate of recovery from adaptation 
 };
